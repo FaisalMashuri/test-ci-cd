@@ -18,17 +18,6 @@ pipeline {
             }
         }
 
-        stage('Push to GitHub Container Registry') {
-            steps {
-                withCredentials([string(credentialsId: 'ghcr-token', variable: 'TOKEN')]) {
-                    sh '''
-                        echo $TOKEN | docker login ghcr.io -u FaisalMashuri --password-stdin
-                        docker push $IMAGE_NAME
-                    '''
-                }
-            }
-        }
-
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f deploy/deployment.yaml'
