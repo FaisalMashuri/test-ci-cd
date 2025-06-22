@@ -1,12 +1,14 @@
-# Tahap pertama: build aplikasi Go
-FROM golang:1.24 as builder
+# Tahap 1: Build aplikasi dengan Go 1.24
+FROM golang:1.24 AS builder
 
 WORKDIR /app
-COPY . .
+COPY go.mod go.sum ./
+RUN go mod download
 
+COPY . .
 RUN go build -o app .
 
-# Tahap kedua: runtime container
+# Tahap 2: Runtime container
 FROM debian:bookworm-slim
 
 WORKDIR /app
