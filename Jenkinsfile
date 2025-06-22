@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "ghcr.io/FaisalMashuri/test-ci-cd:latest"
+        USERNAME = "faisalmashuri"
+        IMAGE_NAME = "ghcr.io/${USERNAME}/test-ci-cd:latest"
     }
 
     stages {
@@ -22,7 +23,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'ghcr-token', variable: 'TOKEN')]) {
                     sh '''
-                      echo $TOKEN | docker login ghcr.io -u FaisalMashuri --password-stdin
+                      echo $TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
                       docker push $IMAGE_NAME
                     '''
                 }
