@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/FaisalMashuri/test-ci-cd:latest
+          image: ghcr.io/faisalmashuri/test-ci-cd:latest
           ports:
             - containerPort: 4000
 ---
