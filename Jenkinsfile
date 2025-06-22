@@ -20,12 +20,12 @@ pipeline {
 
         stage('Push to GitHub Container Registry') {
             steps {
-                withCredentials([string(credentialsId: 'ghcr-token', variable: 'TOKEN')]) {
-                    sh '''
-                        echo $TOKEN | docker login ghcr.io -u FaisalMashuri --password-stdin
-                        docker push $IMAGE_NAME
-                    '''
-                }
+               withCredentials([usernamePassword(credentialsId: 'ghcr-token', usernameVariable: 'GHCR_USER', passwordVariable: 'GHCR_PAT')]) {
+                   sh '''
+                       echo $GHCR_PAT | docker login ghcr.io -u $GHCR_USER --password-stdin
+                       docker push $IMAGE_NAME
+                   '''
+               }
             }
         }
 
