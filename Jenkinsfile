@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', credentialsId: 'github-token', url: 'https://github.com/FaisalMashuri/test-ci-cd.git'
+                git branch: 'master', credentialsId: 'github-token', url: 'https://github.com/FaisalMashuri/test-ci-cd.git'
             }
         }
 
